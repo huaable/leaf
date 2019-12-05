@@ -30,7 +30,7 @@
                 <table class="table mt15">
 <?php foreach ($attributes as $key=>$value){ ?>
                     <tr>
-                        <td><?php echo $value; ?></td>
+                        <td>{{ labels.<?php echo $key; ?> }}</td>
                         <td>{{ entity.<?php echo $key; ?> }}</td>
                     </tr>
 

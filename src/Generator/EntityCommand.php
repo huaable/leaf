@@ -30,11 +30,6 @@ class EntityCommand extends Command
         $entityName = $this->convert($tableName, false);
 
         $attributes = $allAttributes = self::getField($tableName);
-        unset($attributes['created_at']);
-        unset($attributes['updated_at']);
-
-        $attributesNoId = $attributes;
-        unset($attributesNoId['id']);
 
         $rootPath = Application::$app['path'] . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
 
@@ -54,7 +49,7 @@ class EntityCommand extends Command
             View::renderText(file_get_contents(__DIR__ . '/tpl/entity.twig'), [
                 'entityName' => $entityName,
                 'tableName' => $tableName,
-                'attribute' => $attributesNoId,
+                'attribute' => $attributes,
                 'fieldType' => self::getFieldType($tableName),
                 'tableComment' => self::getTableComment($tableName),
             ])

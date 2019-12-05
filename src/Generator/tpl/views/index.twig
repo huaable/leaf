@@ -54,11 +54,11 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-<?php  $i = 0; foreach ($attributes as $key => $value) {  if ($i++ > 0) { break; } ?>
+<?php $i = 0; foreach ($attributes as $key => $value) { if ($i++ > 0) { break; } ?>
                                     <th>{{ sort_by('id', 'ID') }}</th>
 <?php } ?>
-<?php  $i = 0; foreach ($attributesNoId as $key => $value) {  if ($i++ > 2) { break; } ?>
-                                    <th><?php echo $value; ?></th>
+<?php $i = 0; foreach ($attributesNoId as $key => $value) { if ($i++ > 2) { break; } ?>
+                                    <th>{{ labels.<?php echo $key; ?> }}</th>
 <?php } ?>
                                     <th>操作</th>
                                 </tr>

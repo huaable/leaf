@@ -74,11 +74,12 @@ class CurdCommand extends Command
         $tableComment = self::getTableComment($tableName, $entityName);
 
         $attributes = $allAttributes = self::getField($tableName);
-        unset($attributes['created_at']);
-        unset($attributes['updated_at']);
 
+//
         $attributesNoId = $attributes;
         unset($attributesNoId['id']);
+        unset($attributesNoId['created_at']);
+        unset($attributesNoId['updated_at']);
 
         $checkList = [
             //$bundlePath . 'Service' . DIRECTORY_SEPARATOR . $entityName . 'Service.php',
@@ -111,7 +112,7 @@ class CurdCommand extends Command
                 'middleName' => $middleName,
                 'bundleMiddleName' => $bundleMiddleName,
                 'tableComment' => $tableComment,
-                'attributes' => $attributesNoId,
+                'attributesNoId' => $attributesNoId,
                 'entityNamespace' => $entityNamespace,
             ])
         );
@@ -124,7 +125,6 @@ class CurdCommand extends Command
                 'bundleName' => $bundleName,
                 'entityName' => $entityName,
                 'middleName' => $middleName,
-                'attributes' => $attributes,
                 'bundleMiddleName' => $bundleMiddleName,
                 'tableComment' => $tableComment,
             ])
@@ -136,7 +136,7 @@ class CurdCommand extends Command
                 'bundleName' => $bundleName,
                 'entityName' => $entityName,
                 'middleName' => $middleName,
-                'attributes' => $attributes,
+                'attributesNoId' => $attributesNoId,
                 'bundleMiddleName' => $bundleMiddleName,
                 'tableComment' => $tableComment,
             ])
@@ -161,7 +161,6 @@ class CurdCommand extends Command
                 'bundleName' => $bundleName,
                 'entityName' => $entityName,
                 'middleName' => $middleName,
-                'attributes' => $attributes,
                 'bundleMiddleName' => $bundleMiddleName,
                 'tableComment' => $tableComment,
             ])
