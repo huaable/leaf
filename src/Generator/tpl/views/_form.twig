@@ -6,8 +6,12 @@
 <div class="form-group">
     <label class="col-sm-2 control-label" for="input-<?php echo $key; ?>">{{ labels.<?php echo $key; ?> }}</label>
     <div class="col-sm-8">
+        <?php if($attributesSqlType[$key] == 'text') {?>
+        <textarea cols="30" rows="5" name="<?php echo $entityName; ?>[<?php echo $key; ?>]" class="form-control" id="input-<?php echo $key; ?>" >{{ app.request.get('<?php echo $entityName; ?>').<?php echo $key; ?>|default(entity.<?php echo $key; ?>) }}</textarea>
+        <?php } else { ?>
         <input type="text" name="<?php echo $entityName; ?>[<?php echo $key; ?>]" class="form-control"
                value="{{ app.request.get('<?php echo $entityName; ?>').<?php echo $key; ?>|default(entity.<?php echo $key; ?>) }}" id="input-<?php echo $key; ?>" >
+        <?php } ?>
         <span class="help-block">{# 帮助信息 #}</span>
     </div>
 </div>

@@ -17,7 +17,7 @@ class Twig implements TemplateInterface
      * 渲染视图
      *
      * @param string $view 模板文件
-     * @param array $data
+     * @param array  $data
      * @return string
      */
     public function render($view, $data = array())
@@ -30,21 +30,22 @@ class Twig implements TemplateInterface
             $bundleName = substr($view, 1, stripos($view, '/') - 1);
             $bundle = $app->getBundle($bundleName);
 
+            $filesystem = $app['twig.loader.filesystem'];
+            $paths = $filesystem->getPaths($bundle->getName());
+
             // views/AcmeDemoBundle/welcome/index.twig
             if (file_exists($app['twig.path'] . '/' . $bundleName)) {
-                $app['twig.loader.filesystem'] = $app->extend('twig.loader.filesystem', function ($filesystem, $app) use ($bundle) {
-                    /** @var $filesystem \Twig_Loader_Filesystem */
-                    $filesystem->addPath($app['twig.path'] . '/' . $bundle->getName(), $bundle->getName());
-                    return $filesystem;
-                });
+                $path = $app['twig.path'] . '/' . $bundle->getName();
+                if (!in_array($path, $paths)) {
+                    $filesystem->addPath($path, $bundle->getName());
+                }
             }
-            
+
             // src/Acme/AcmeDemoBundle/views/welcome/index.twig
-            $app['twig.loader.filesystem'] = $app->extend('twig.loader.filesystem', function ($filesystem, $app) use ($bundle) {
-                /** @var $filesystem \Twig_Loader_Filesystem */
-                $filesystem->addPath($bundle->getPath() . '/resources/views/', $bundle->getName());
-                return $filesystem;
-            });
+            $path = $bundle->getPath() . '/resources/views';
+            if (!in_array($path, $paths)) {
+                $filesystem->addPath($path, $bundle->getName());
+            }
 
         }
 
@@ -55,7 +56,7 @@ class Twig implements TemplateInterface
      * 把数据共享给所有模板文件
      *
      * @param string|array $name
-     * @param $value
+     * @param              $value
      * @return static
      */
     public function share($name, $value = null)

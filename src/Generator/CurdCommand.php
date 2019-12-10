@@ -74,8 +74,8 @@ class CurdCommand extends Command
         $tableComment = self::getTableComment($tableName, $entityName);
 
         $attributes = $allAttributes = self::getField($tableName);
+        $attributesSqlType = self::getFieldSqlType($tableName);
 
-//
         $attributesNoId = $attributes;
         unset($attributesNoId['id']);
         unset($attributesNoId['created_at']);
@@ -137,6 +137,7 @@ class CurdCommand extends Command
                 'entityName' => $entityName,
                 'middleName' => $middleName,
                 'attributesNoId' => $attributesNoId,
+                'attributesSqlType' => $attributesSqlType,
                 'bundleMiddleName' => $bundleMiddleName,
                 'tableComment' => $tableComment,
             ])
@@ -215,10 +216,21 @@ class CurdCommand extends Command
 
     protected function getFieldType($tableName)
     {
-        $fieldArr = DB::table('')->findAllBySql('show full fields from {{%' . $tableName . '}}');
+        $fieldArr = DB::table('')->findAllBySql('show full fields from ' . $tableName );
         $attribute = array();
         foreach ($fieldArr as $item) {
             $attribute[$item['Field']] = self::getColumnPhpType($item['Type']);
+        }
+
+        return $attribute;
+    }
+
+    protected function getFieldSqlType($tableName)
+    {
+        $fieldArr = DB::table('')->findAllBySql('show full fields from ' . $tableName );
+        $attribute = array();
+        foreach ($fieldArr as $item) {
+            $attribute[$item['Field']] = $item['Type'];
         }
 
         return $attribute;

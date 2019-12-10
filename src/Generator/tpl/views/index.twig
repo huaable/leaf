@@ -55,12 +55,12 @@
                             <thead>
                                 <tr>
 <?php $i = 0; foreach ($attributes as $key => $value) { if ($i++ > 0) { break; } ?>
-                                    <th>{{ sort_by('id', 'ID') }}</th>
+                                    <th  width="100">{{ sort_by('id', 'ID') }}</th>
 <?php } ?>
-<?php $i = 0; foreach ($attributesNoId as $key => $value) { if ($i++ > 2) { break; } ?>
+<?php $i = 0; foreach ($attributesNoId as $key => $value) { if ($i++ > 4) { break; } ?>
                                     <th>{{ labels.<?php echo $key; ?> }}</th>
 <?php } ?>
-                                    <th>操作</th>
+                                    <th width="150">操作</th>
                                 </tr>
                             </thead>
 
