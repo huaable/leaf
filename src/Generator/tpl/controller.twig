@@ -62,10 +62,13 @@ class {{ entityName }}Controller
             ->orderBy($sortBy)
             ->paginate();
 
+        $entity = new {{ entityName }}();
+        $entity->loadDefaultValues();
+
         //视图
         return View::render('@{{ bundleName }}/{{ middleName }}/index.twig', [
             'dataProvider' => $dataProvider,
-            'labels' => {{ entityName }}::labels(),
+            'entity' => $entity,
         ]);
     }
 
@@ -101,7 +104,6 @@ class {{ entityName }}Controller
 
         //视图
         return View::render('@{{ bundleName }}/{{ middleName }}/create.twig', [
-            'labels' => {{ entityName }}::labels(),
             'entity' => $entity,
             'error' => $error,
         ]);
@@ -142,7 +144,6 @@ class {{ entityName }}Controller
 
         //视图
         return View::render('@{{ bundleName }}/{{ middleName }}/update.twig', [
-            'labels' => {{ entityName }}::labels(),
             'entity' => $entity,
             'error' => $error,
         ]);
@@ -177,7 +178,6 @@ class {{ entityName }}Controller
 //
 //        //视图
 //        return View::render('@{{ bundleName }}/{{ middleName }}/view.twig', [
-//            'labels' => {{ entityName }}::labels(),
 //            'entity' => $entity,
 //        ]);
 //    }

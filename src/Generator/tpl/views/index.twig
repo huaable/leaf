@@ -29,7 +29,7 @@
                 {#<form action="{{ url('<?php echo $bundleMiddleName; ?><?php echo $middleName; ?>') }}" method="get" class="form-inline form-search mt15">
 <?php $i=0; foreach ($attributes as $key=>$value){ if ($i++ > 2) { break; } ?>
                     <div class="form-group">
-                        <label><?php echo $value; ?></label>
+                        <label>{{ entity.labels().<?php echo $key; ?> }}</label>
                         <input type="text" name="<?php echo $entityName; ?>[<?php echo $key; ?>]" class="form-control"
                                value="{{ app.request.get('<?php echo $entityName; ?>').<?php echo $key; ?>|default('') }}">
                     </div>
@@ -58,7 +58,7 @@
                                     <th  width="100">{{ sort_by('id', 'ID') }}</th>
 <?php } ?>
 <?php $i = 0; foreach ($attributesNoId as $key => $value) { if ($i++ > 4) { break; } ?>
-                                    <th>{{ labels.<?php echo $key; ?> }}</th>
+                                    <th>{{ entity.labels().<?php echo $key; ?> }}</th>
 <?php } ?>
                                     <th width="150">操作</th>
                                 </tr>
@@ -67,7 +67,7 @@
                             <tbody>
                             {% for item in dataProvider.data %}
                                 <tr>
-<?php $i = 0; foreach ($attributes as $key => $value) {  if ($i++ > 3) { break; } ?>
+<?php $i = 0; foreach ($attributes as $key => $value) {  if ($i++ > 4) { break; } ?>
                                     <td>{{ item.<?php echo $key; ?> }}</td>
 <?php } ?>
                                     <td>

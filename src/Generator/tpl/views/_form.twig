@@ -4,7 +4,7 @@
 
 <?php foreach ($attributesNoId as $key=>$value){ ?>
 <div class="form-group">
-    <label class="col-sm-2 control-label" for="input-<?php echo $key; ?>">{{ labels.<?php echo $key; ?> }}</label>
+    <label class="col-sm-2 control-label" for="input-<?php echo $key; ?>">{{ entity.labels().<?php echo $key; ?> }}</label>
     <div class="col-sm-8">
         <?php if($attributesSqlType[$key] == 'text') {?>
         <textarea cols="30" rows="5" name="<?php echo $entityName; ?>[<?php echo $key; ?>]" class="form-control" id="input-<?php echo $key; ?>" >{{ app.request.get('<?php echo $entityName; ?>').<?php echo $key; ?>|default(entity.<?php echo $key; ?>) }}</textarea>
